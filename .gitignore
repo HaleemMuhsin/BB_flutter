@@ -1,0 +1,10 @@
+/.dart_tool
+/.vscode
+/android
+/ios
+/build
+/linux
+/windows
+/macos
+/test
+/web
