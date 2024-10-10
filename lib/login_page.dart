@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/widgets/bg_image.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -8,14 +9,7 @@ class LoginPage extends StatelessWidget {
     return Stack(
       children: [
         // Background Image Container
-        Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/loginPage_bg.png'), // Background image
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
+        const BackgroundImageWidget(imagePath: 'assets/images/loginPage_bg.png'),
         // Scaffold containing the rest of the UI
         Scaffold(
           backgroundColor: Colors.transparent, // Make Scaffold background transparent
