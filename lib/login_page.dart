@@ -85,7 +85,7 @@ class LoginPage extends StatelessWidget {
                         // Username Input Field
                         TextField(
                           style:
-                              const TextStyle(fontSize: 15, color: Color(0xFF8F8F8F)),
+                              const TextStyle(fontSize: 15),
                           decoration: InputDecoration(
                               filled: true,
                               fillColor: const Color(0xFFF1F1F1),
