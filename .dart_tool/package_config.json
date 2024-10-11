@@ -239,10 +239,10 @@
       "name": "my_app",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "3.5"
+      "languageVersion": "2.19"
     }
   ],
-  "generated": "2024-10-10T22:16:28.623128Z",
+  "generated": "2024-10-11T17:43:13.470183Z",
   "generator": "pub",
   "generatorVersion": "3.5.3",
   "flutterRoot": "file:///H:/flutter",
