@@ -1,6 +1,19 @@
+<<<<<<< HEAD
+/.dart_tool
+/.vscode
+/android
+/ios
+/build
+/linux
+/windows
+/macos
+/test
+/web
+=======
 # build
 /build
 /.dart_tool
 /.idea
 /.vscode
 /android
+>>>>>>> BB_flutter/main
