@@ -1,55 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/admin_page.dart';
 import 'package:my_app/widgets/bg_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:logger/logger.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final Logger _logger = Logger();
-
-  Future<void> _login() async {
-    try {
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-      // Handle successful login and navigate to AdminPage
-      _logger.i("Login successful: ${userCredential.user?.email}");
-      
-      // Navigate to AdminPage
-      Navigator.pushReplacement(
-        
-        
-        context,
-        MaterialPageRoute(builder: (context) => const AdminPage()),
-      );
-      
-    } on FirebaseAuthException catch (e) {
-      // Handle login errors
-      if (e.code == 'user-not-found') {
-        _logger.e('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        _logger.e('Wrong password provided for that user.');
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        // Background Image Container
         const BackgroundImageWidget(imagePath: 'assets/images/loginPage_bg.png'),
+        // Scaffold containing the rest of the UI
         Scaffold(
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.transparent, // Make Scaffold background transparent
           body: SafeArea(
             child: Container(
               padding: const EdgeInsets.all(25.0),
@@ -72,10 +35,12 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Positioned.fill(
                         child: Image.asset(
-                          'assets/images/billboardAppText_shader.png',
-                          fit: BoxFit.cover,
+                          'assets/images/billboardAppText_shader.png', // Image path
+                          fit: BoxFit.cover, // Adjust the image to cover the entire area
                         ),
                       ),
+
+                      // Glow effect
                       Text(
                         'Billboard App',
                         style: TextStyle(
@@ -88,6 +53,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         textAlign: TextAlign.center,
                       ),
+                      // Main text
                       Text(
                         'Billboard App',
                         style: TextStyle(
@@ -103,49 +69,69 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
 
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 20), // Increased space for better layout
 
+                  // Input Fields Container
                   Container(
-                    padding: const EdgeInsets.fromLTRB(30, 60, 30, 60),
+                    padding:
+                        const EdgeInsets.fromLTRB(30, 60, 30, 60), // Padding inside the container
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15.0),
+                      color: Colors.white, // Background color for input fields
+                      borderRadius:
+                          BorderRadius.circular(15.0), // Rounded corners
                     ),
                     child: Column(
                       children: [
+                        // Username Input Field
                         TextField(
-                          controller: _emailController,
-                          style: const TextStyle(fontSize: 15),
+                          style:
+                              const TextStyle(fontSize: 15),
                           decoration: InputDecoration(
-                            filled: true,
-                            fillColor: const Color(0xFFF1F1F1),
-                            contentPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(9.0),
-                              borderSide: BorderSide.none,
-                            ),
-                            hintText: 'Username:',
-                            hintStyle: const TextStyle(color: Color(0xFF8F8F8F)),
-                          ),
+                              filled: true,
+                              fillColor: const Color(0xFFF1F1F1),
+                              contentPadding:
+                                  const EdgeInsets.symmetric(vertical: 12.0,
+                                      horizontal:
+                                          12.0), // Adjusted padding
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.circular(9.0), // Rounded corners
+                                borderSide:
+                                    BorderSide.none, // No border side for better appearance
+                              ),
+                              hintText: 'Username:',
+                              hintStyle:
+                                  const TextStyle(color: Color(0xFF8F8F8F))),
                         ),
 
-                        const SizedBox(height: 25),
+                        const SizedBox(height: 25), // Space between text fields
 
+                        // Password Input Field
                         TextField(
-                          controller: _passwordController,
-                          style: const TextStyle(fontSize: 15),
+                          style:
+                              const TextStyle(fontSize: 15),
                           decoration: InputDecoration(
-                            filled: true,
-                            fillColor: const Color(0xFFF1F1F1),
-                            contentPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(9.0),
-                            ),
-                            hintText: 'Password:',
-                            hintStyle: const TextStyle(color: Color(0xFF8F8F8F)),
-                          ),
-                          obscureText: true,
+                              filled: true,
+                              fillColor:
+                                  const Color(0xFFF1F1F1),
+                              contentPadding:
+                                  const EdgeInsets.symmetric(vertical:
+                                      12.0, horizontal:
+                                      12.0), // Adjusted padding
+                              border:
+                                  OutlineInputBorder(
+                                borderSide:
+                                    BorderSide.none, // Border color when focused
+                                borderRadius:
+                                    BorderRadius.circular(9.0), // Rounded corners
+                              ),
+                              hintText:
+                                  'Password:',
+                              hintStyle:
+                                  const TextStyle(color:
+                                      Color(0xFF8F8F8F))),
+                          obscureText:
+                              true, // To hide password input
                         ),
                       ],
                     ),
@@ -154,36 +140,63 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 18),
 
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween, // Space between buttons
                     children: [
                       ElevatedButton(
                         onPressed: () {
                           // Action when pressed for Cancel
                         },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          foregroundColor: Colors.black,
-                          textStyle: const TextStyle(fontFamily: 'SF-UI-Display'),
-                          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 52.0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14),
+                        style:
+                            ElevatedButton.styleFrom(
+                          backgroundColor:
+                              Colors.white,
+                          foregroundColor:
+                              Colors.black,
+                          textStyle:
+                              const TextStyle(fontFamily:
+                                  'SF-UI-Display'),
+                          padding:
+                              const EdgeInsets.symmetric(vertical:
+                                  20.0,
+                                  horizontal:
+                                  52.0), // Padding
+                          shape:
+                              RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(14), // Rounded corners
                           ),
                         ),
-                        child: const Text('Cancel'),
+                        child:
+                            const Text('Cancel'),
                       ),
 
                       ElevatedButton(
-                        onPressed: _login,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          foregroundColor: Colors.white,
-                          textStyle: const TextStyle(fontFamily: 'SF-UI-Display'),
-                          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 52.0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14),
+                        onPressed: () {
+                          // Action when pressed for Login
+                        },
+                        style:
+                            ElevatedButton.styleFrom(
+                          backgroundColor:
+                              Colors.black,
+                          foregroundColor:
+                              Colors.white,
+                          textStyle:
+                              const TextStyle(fontFamily:
+                                  'SF-UI-Display'),
+                          padding:
+                              const EdgeInsets.symmetric(vertical:
+                                  20.0,
+                                  horizontal:
+                                  52.0), // Padding
+                          shape:
+                              RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(14), // Rounded corners
                           ),
                         ),
-                        child: const Text('Login'),
+                        child:
+                            const Text('Login'),
                       ),
                     ],
                   )
