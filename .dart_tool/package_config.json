@@ -311,7 +311,7 @@
       "name": "my_app",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.5"
     }
   ],
   "generated": "2024-10-16T09:16:47.196436Z",
